@@ -13,6 +13,7 @@ private:
 
 public:
   Board(const std::size_t &size);
+  void add_piece(Position &position, PieceType type);
   Node<Piece> *get_piece(Position position) const;
 };
 } // namespace boop

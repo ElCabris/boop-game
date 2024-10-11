@@ -13,7 +13,7 @@ namespace boop {
 	public:
 		Piece();
 		PieceType get_type() const;
-		void set_type();
+		void set_type(const PieceType& type);
 	};
 }
 #endif
