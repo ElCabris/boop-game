@@ -61,6 +61,6 @@ template <typename T> std::size_t boop::NodeMatrix<T>::get_size() const {
 }
 
 template <typename T> boop::Node<T> *boop::NodeMatrix<T>::get_head() const {
-  return _nodes[0];
+  return _nodes;
 }
 #endif
