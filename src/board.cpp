@@ -5,8 +5,7 @@
 
 boop::Board::Board(const std::size_t &size) : _matrix(size) {}
 
-boop::Node<boop::Piece> *
-boop::Board::get_piece(Position position) const {
+boop::Node<boop::Piece> *boop::Board::get_piece(Position position) const {
   auto aux = _matrix.get_head();
 
   for (auto i = 0; i < position.row; i++) {
@@ -26,12 +25,16 @@ boop::Board::get_piece(Position position) const {
   return aux;
 }
 
-void boop::Board::add_piece(Position& position, PieceType type) {
-	auto aux = get_piece(position);
+void boop::Board::add_piece(Position &position, PieceType type) {
+  auto aux = get_piece(position);
 
-	if (aux->value.get_type() != EMPTY) {
-		throw std::invalid_argument("box " + std::to_string(position.row) + ',' + std::to_string(position.col) + "is not available");
-	}
+  if (aux->value.get_type() != EMPTY) {
+    throw std::invalid_argument("box " + std::to_string(position.row) + ',' +
+                                std::to_string(position.col) +
+                                "is not available");
+  }
 
-	aux->value.set_type(type);
+  aux->value.set_type(type);
 }
+
+std::size_t boop::Board::get_size() const { return _matrix.get_size(); }
