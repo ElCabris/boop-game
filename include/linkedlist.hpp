@@ -1,3 +1,5 @@
+#ifndef LINKEDLIST_HPP
+#define LINKEDLIST_HPP
 #include <cstddef>
 namespace boop {
 
@@ -27,7 +29,7 @@ template <typename T> boop::Node<T>::Node() : value(T()) {}
 
 template <typename T>
 boop::NodeMatrix<T>::NodeMatrix(const std::size_t &size)
-    : _size(size), _nodes(Node<T>()), _nodes(new Node<T>[size * size]) {
+    : _nodes(new Node<T>[size * size]), _size(size) {
   for (std::size_t i = 0; i < _size; i++) {
     for (size_t j = 0; j < _size; j++) {
       std::size_t node_id = i * _size + j;
@@ -61,3 +63,4 @@ template <typename T> std::size_t boop::NodeMatrix<T>::get_size() const {
 template <typename T> boop::Node<T> *boop::NodeMatrix<T>::get_head() const {
   return _nodes[0];
 }
+#endif

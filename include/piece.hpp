@@ -1,3 +1,5 @@
+#ifndef PIECE_HPP 
+#define PIECE_HPP
 namespace boop {
 	enum PieceType {
 		EMPTY,
@@ -14,3 +16,4 @@ namespace boop {
 		void set_type();
 	};
 }
+#endif
