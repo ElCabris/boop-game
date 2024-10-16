@@ -9,7 +9,7 @@ OBJDIR := obj
 BINDIR := bin
 
 # Nombre del ejecutable
-TARGET := programa
+TARGET := boop 
 
 # Compilador y flags
 CC := g++
