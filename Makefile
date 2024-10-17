@@ -13,7 +13,7 @@ TARGET := boop
 
 # Compilador y flags
 CC := g++
-CFLAGS := -Wall -Wextra -I$(INCDIR) -std=c++17
+CFLAGS := -Wall -Wextra -I$(INCDIR) -std=c++17 -g
 LDFLAGS := 
 
 # Archivos fuente y objeto
