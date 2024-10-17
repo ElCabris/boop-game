@@ -8,8 +8,10 @@ private:
   Board &_board;
 
 public:
-	GBoard(Board& board);
-	void draw() const;
+  GBoard(Board &board);
+  void draw() const;
 };
-}
+
+char type_piece_to_char(const PieceType &type);
+} // namespace boop
 #endif
