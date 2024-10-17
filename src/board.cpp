@@ -38,3 +38,57 @@ void boop::Board::add_piece(Position &position, PieceType type) {
 }
 
 std::size_t boop::Board::get_size() const { return _matrix.get_size(); }
+
+bool boop::Board::is_game_over() {
+  for (int i = 0, size = static_cast<int>(get_size()) - 2; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      auto current = get_piece({i, j});
+
+      if (current->value.get_type() == CAT) {
+
+        // check horizontally
+        if (current->value.get_type() == current->right->value.get_type() &&
+            current->right->value.get_type() ==
+                current->right->right->value.get_type() &&
+            current->value.get_side() == current->right->value.get_side() &&
+            current->right->value.get_side() ==
+                current->right->right->value.get_side())
+          return true;
+
+        // check vertically
+        if (current->value.get_side() == current->down->value.get_side() &&
+            current->down->value.get_side() ==
+                current->down->down->value.get_side() &&
+            current->value.get_type() == current->down->value.get_type() &&
+            current->down->value.get_type() ==
+                current->down->down->value.get_type())
+          return true;
+
+        // check on the right diagonal
+        if (current->value.get_type() ==
+                current->down->right->value.get_type() &&
+            current->down->right->value.get_type() ==
+                current->down->down->right->right->value.get_type() &&
+            current->value.get_side() ==
+                current->down->right->value.get_side() &&
+            current->down->right->value.get_side() ==
+                current->down->down->right->right->value.get_side())
+          return true;
+
+        // check on the left diagonal
+        if (j >= 2) {
+          if (current->value.get_side() ==
+                  current->down->left->value.get_side() &&
+              current->down->left->value.get_side() ==
+                  current->down->down->left->left->value.get_side() &&
+              current->value.get_type() ==
+                  current->down->left->value.get_type() &&
+              current->down->down->left->left->value.get_type())
+            return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
