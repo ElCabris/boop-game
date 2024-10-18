@@ -12,6 +12,5 @@ public:
   void draw() const;
 };
 
-char type_piece_to_char(const PieceType &type);
 } // namespace boop
 #endif

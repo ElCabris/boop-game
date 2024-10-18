@@ -1,6 +1,6 @@
-#include "piece.hpp"
 #include <graphics.hpp>
 #include <iostream>
+#include <piece.hpp>
 
 boop::GBoard::GBoard(Board &board) : _board(board) {}
 
@@ -19,16 +19,5 @@ void boop::GBoard::draw() const {
       std::cout << ' ';
     }
     std::cout << std::endl;
-  }
-}
-
-char boop::type_piece_to_char(const PieceType &type) {
-  switch (type) {
-  case CAT:
-    return 'C';
-  case KITTEN:
-    return 'k';
-  default:
-    return ' ';
   }
 }

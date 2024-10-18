@@ -18,5 +18,7 @@ public:
   void set_type(const PieceType &type);
   void set_side(const Side &side);
 };
+char type_piece_to_char(const PieceType &type);
+PieceType char_to_type_piece(const char &type);
 } // namespace boop
 #endif
