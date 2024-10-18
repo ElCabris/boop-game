@@ -34,7 +34,7 @@ int main() {
   char type_piece;
   int row, col;
 
-  while (!board.is_game_over()) {
+  while (true) {
     print();
 
     // player 1's turn
@@ -42,10 +42,16 @@ int main() {
     std::cin >> type_piece >> row >> col;
     std::cin.ignore();
 
+    if (board.is_game_over())
+      break;
+
     // player 2's turn
     std::cout << "player2, push your piece: ";
     std::cin >> type_piece >> row >> col;
     std::cin.ignore();
+
+    if (board.is_game_over())
+      break;
   }
   return 0;
 }
