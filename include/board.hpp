@@ -11,6 +11,7 @@ struct Position {
 class Board {
 private:
   NodeMatrix<Piece> _matrix;
+  void move_adjacent_pieces(const Position &last_move);
 
 public:
   Board(const std::size_t &size);

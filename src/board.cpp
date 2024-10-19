@@ -115,3 +115,98 @@ void boop::Board::move_piece(const Position &from, const Position &to) {
   piece_to->value.set_type(piece_from->value.get_type());
   piece_from->value.set_type(EMPTY);
 }
+
+void boop::Board::move_adjacent_pieces(const Position &last_move) {
+  auto current = get_piece(last_move);
+
+  // right
+  if (current->right != nullptr && current->right->value.get_type() != EMPTY &&
+      current->right->value.get_type() <= current->value.get_type()) {
+    if (current->right->right == nullptr)
+      delete_piece({last_move.row, last_move.col + 1});
+    else if (current->right->right->value.get_type() == EMPTY)
+      move_piece({last_move.row, last_move.col + 1},
+                 {last_move.row, last_move.col + 2});
+  }
+
+  // left
+  if (current->left != nullptr && current->left->value.get_type() != EMPTY &&
+      current->left->value.get_type() <= current->value.get_type()) {
+    if (current->left->left == nullptr)
+      delete_piece({last_move.row, last_move.col - 1});
+    else if (current->left->left->value.get_type() == EMPTY)
+      move_piece({last_move.row, last_move.col - 1},
+                 {last_move.row, last_move.col - 2});
+  }
+
+  // up
+  if (current->up != nullptr && current->up->value.get_type() != EMPTY &&
+      current->up->value.get_type() <= current->value.get_type()) {
+    if (current->up->up == nullptr)
+      delete_piece({last_move.row - 1, last_move.col});
+    else if (current->up->up->value.get_type() == EMPTY)
+      move_piece({last_move.row - 1, last_move.col},
+                 {last_move.row - 2, last_move.col});
+  }
+
+  // down
+  if (current->down != nullptr && current->down->value.get_type() != EMPTY &&
+      current->down->value.get_type() <= current->value.get_type()) {
+    if (current->down->down == nullptr)
+      delete_piece({last_move.row + 1, last_move.col});
+    else if (current->down->down->value.get_type() == EMPTY)
+      move_piece({last_move.row + 1, last_move.col},
+                 {last_move.row + 2, last_move.col});
+  }
+
+  // up-right
+  if (current->up != nullptr && current->up->right != nullptr &&
+      current->up->right->value.get_type() != EMPTY &&
+      current->up->right->value.get_type() <= current->value.get_type()) {
+    if (current->up->right->up == nullptr ||
+        current->up->right->right == nullptr)
+      delete_piece({last_move.row - 1, last_move.col + 1});
+    else if (current->up->right->up->value.get_type() == EMPTY ||
+             current->up->right->right->value.get_type() == EMPTY)
+      move_piece({last_move.row - 1, last_move.col + 1},
+                 {last_move.row - 2, last_move.col + 2});
+  }
+
+  // up-left
+  if (current->up != nullptr && current->up->left != nullptr &&
+      current->up->left->value.get_type() != EMPTY &&
+      current->up->left->value.get_type() <= current->value.get_type()) {
+    if (current->up->left->up == nullptr || current->up->left->left == nullptr)
+      delete_piece({last_move.row - 1, last_move.col - 1});
+    else if (current->up->left->up->value.get_type() == EMPTY ||
+             current->up->left->left->value.get_type() == EMPTY)
+      move_piece({last_move.row - 1, last_move.col - 1},
+                 {last_move.row - 2, last_move.col - 2});
+  }
+
+  // down-right
+  if (current->down != nullptr && current->down->right != nullptr &&
+      current->down->right->value.get_type() != EMPTY &&
+      current->down->right->value.get_type() <= current->value.get_type()) {
+    if (current->down->right->down == nullptr ||
+        current->down->right->right == nullptr)
+      delete_piece({last_move.row + 1, last_move.col + 1});
+    else if (current->down->right->down->value.get_type() == EMPTY ||
+             current->down->right->right->value.get_type() == EMPTY)
+      move_piece({last_move.row + 1, last_move.col + 1},
+                 {last_move.row + 2, last_move.col + 2});
+  }
+
+  // down-left
+  if (current->down != nullptr && current->down->left != nullptr &&
+      current->down->left->value.get_type() != EMPTY &&
+      current->down->left->value.get_type() <= current->value.get_type()) {
+    if (current->down->left->down == nullptr ||
+        current->down->left->left == nullptr)
+      delete_piece({last_move.row + 1, last_move.col - 1});
+    else if (current->down->left->down->value.get_type() == EMPTY ||
+             current->down->left->left->value.get_type() == EMPTY)
+      move_piece({last_move.row + 1, last_move.col - 1},
+                 {last_move.row + 2, last_move.col - 2});
+  }
+}
