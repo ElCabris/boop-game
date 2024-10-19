@@ -36,6 +36,7 @@ void boop::Board::add_piece(Position &position, PieceType type) {
   }
 
   aux->value.set_type(type);
+  move_adjacent_pieces(position);
 }
 
 std::size_t boop::Board::get_size() const { return _matrix.get_size(); }
