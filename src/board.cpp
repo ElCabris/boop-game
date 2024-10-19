@@ -26,7 +26,7 @@ boop::Node<boop::Piece> *boop::Board::get_piece(Position position) const {
   return aux;
 }
 
-void boop::Board::add_piece(Position &position, PieceType type) {
+void boop::Board::add_piece(const Position &position, PieceType type) {
   auto aux = get_piece(position);
 
   if (aux->value.get_type() != EMPTY) {
