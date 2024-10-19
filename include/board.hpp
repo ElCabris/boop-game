@@ -19,6 +19,7 @@ public:
   std::size_t get_size() const;
   bool is_game_over();
   void delete_piece(const Position &position);
+  void move_piece(const Position &from, const Position &to);
 };
 } // namespace boop
 #endif

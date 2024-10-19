@@ -1,4 +1,5 @@
 #include <board.hpp>
+#include <cassert>
 #include <piece.hpp>
 #include <stdexcept>
 #include <string>
@@ -103,4 +104,14 @@ void boop::Board::delete_piece(const Position &position) {
                                 " but it is already empty");
 
   current->value.set_type(EMPTY);
+}
+
+void boop::Board::move_piece(const Position &from, const Position &to) {
+  auto piece_from = get_piece(from);
+  auto piece_to = get_piece(to);
+  assert(piece_from->value.get_type() != EMPTY &&
+         piece_to->value.get_type() == EMPTY);
+
+  piece_to->value.set_type(piece_from->value.get_type());
+  piece_from->value.set_type(EMPTY);
 }
