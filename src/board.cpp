@@ -92,3 +92,15 @@ bool boop::Board::is_game_over() {
 
   return false;
 }
+
+void boop::Board::delete_piece(const Position &position) {
+  auto current = get_piece(position);
+
+  if (current->value.get_type() == EMPTY)
+    throw std::invalid_argument("You want to remove a piece from position " +
+                                std::to_string(position.row) + ',' +
+                                std::to_string(position.col) +
+                                " but it is already empty");
+
+  current->value.set_type(EMPTY);
+}

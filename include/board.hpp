@@ -18,6 +18,7 @@ public:
   Node<Piece> *get_piece(Position position) const;
   std::size_t get_size() const;
   bool is_game_over();
+  void delete_piece(const Position &position);
 };
 } // namespace boop
 #endif
