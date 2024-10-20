@@ -10,18 +10,13 @@ boop::Node<boop::Piece> *boop::Board::get_piece(Position position) const {
   auto aux = _matrix.get_head();
 
   for (auto i = 0; i < position.row; i++) {
-    if (aux->right == nullptr) {
-      throw std::invalid_argument(std::to_string(position.row) + ", " +
-                                  std::to_string(position.col) + "is no valid");
-    }
+    assert(aux->right != nullptr);
     aux = aux->right;
   }
 
   for (auto i = 0; i < position.col; i++) {
-    if (aux->down == nullptr) {
-      throw std::invalid_argument(std::to_string(position.row) + ", " +
-                                  std::to_string(position.col) + "is no valid");
-    }
+    assert(aux->down != nullptr);
+    aux = aux->down;
   }
   return aux;
 }
@@ -36,6 +31,7 @@ void boop::Board::add_piece(const Position &position, PieceType type) {
   }
 
   aux->value.set_type(type);
+
   move_adjacent_pieces(position);
 }
 
