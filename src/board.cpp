@@ -9,12 +9,12 @@ boop::Board::Board(const std::size_t &size) : _matrix(size) {}
 boop::Node<boop::Piece> *boop::Board::get_piece(Position position) const {
   auto aux = _matrix.get_head();
 
-  for (auto i = 0; i < position.row; i++) {
+  for (auto i = 0; i < position.col; i++) {
     assert(aux->right != nullptr);
     aux = aux->right;
   }
 
-  for (auto i = 0; i < position.col; i++) {
+  for (auto i = 0; i < position.row; i++) {
     assert(aux->down != nullptr);
     aux = aux->down;
   }
