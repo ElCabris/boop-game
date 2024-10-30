@@ -6,7 +6,7 @@ boop::GBoard::GBoard(Board &board) : _board(board) {}
 
 void boop::GBoard::draw() const {
   const auto size = static_cast<int>(_board.get_size());
-  std::cout << ' ';
+  std::cout << "  ";
   for (auto i = 0; i < size; i++) {
     std::cout << (char)('A' + i) << ' ';
   }
