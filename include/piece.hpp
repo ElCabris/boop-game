@@ -1,7 +1,7 @@
 #ifndef PIECE_HPP
 #define PIECE_HPP
 namespace boop {
-enum PieceType { EMPTY, CAT, KITTEN };
+enum PieceType { EMPTY, KITTEN, CAT };
 
 enum Side { PLAYER1, PLAYER2 };
 
