@@ -2,6 +2,10 @@
 #include <iostream>
 #include <piece.hpp>
 
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define BLUE "\033[34m"
+
 boop::GBoard::GBoard(Board &board) : _board(board) {}
 
 void boop::GBoard::draw() const {
