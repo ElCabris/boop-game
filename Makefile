@@ -19,6 +19,7 @@ LDFLAGS :=
 # Archivos fuente y objeto
 SOURCES := $(wildcard $(SRCDIR)/*.cpp)
 OBJECTS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SOURCES))
+DEPS := $(OBJECTS:.o=.d)
 
 # ============================
 #        REGLAS
@@ -31,9 +32,9 @@ all: $(BINDIR)/$(TARGET)
 $(BINDIR)/$(TARGET): $(OBJECTS) | $(BINDIR)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 
-# Regla para compilar archivos objeto
+# Regla para compilar archivos objeto y generar archivos de dependencia
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
 
 # Regla para crear el directorio de objetos
 $(OBJDIR):
@@ -43,19 +44,16 @@ $(OBJDIR):
 $(BINDIR):
 	mkdir -p $(BINDIR)
 
-# Regla para limpiar archivos objeto
+# Regla para limpiar archivos objeto y de dependencia
 clean:
-	rm -f $(OBJECTS)
+	rm -f $(OBJECTS) $(DEPS)
 
-# Regla para limpiar todo (archivos objeto y ejecutable)
+# Regla para limpiar todo (archivos objeto, de dependencia y ejecutable)
 distclean: clean
 	rm -f $(BINDIR)/$(TARGET)
 
-# Regla para mostrar dependencias (opcional)
-# Dependencias automáticas para los archivos objeto
-# Para utilizarlas, necesitas generar archivos .d durante la compilación
-# Esta sección está comentada y requiere ajustes adicionales si se desea usar
-# -include $(OBJECTS:.o=.d)
+# Incluir los archivos de dependencia generados
+-include $(DEPS)
 
 # ============================
 #        .PHONY
